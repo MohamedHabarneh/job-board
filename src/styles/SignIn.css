@@ -1,0 +1,22 @@
+.New-Text {
+    color: #000;
+}
+
+.Input-Field {
+    width: 19vmax;
+    height: 2.8vmax;
+    background: rgba(196, 196, 196, 0.37);
+    display: inline-block;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    border: 1px solid #ccc;
+}
+
+.Form-Wrapper {}
+
+.Comp-Wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
