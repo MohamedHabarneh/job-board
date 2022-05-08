@@ -6,13 +6,33 @@ import { useNavigate } from "react-router-dom";
 export default function EmployerForm() {
     const navigate = useNavigate();
 
-    const[employer,setEmployer] = useState({companyName:'',companyEmail:'',companyPhone:'',streetAddress:'',state:'',zipCode:'' })
+    const[employer,setEmployer] = useState({companyName:'',companyEmail:'',companyPhone:'',hiringRoleId:'',streetAddress:'',state:'',zipCode:'' })
 
+    const roles ={
+      0: 'Owner',
+      1: 'CEO',
+      2: 'Manager',
+      3: 'Human Resource',
+      4: 'Hiring Manager',
+      5: 'Other',
+    } 
+
+    const roleOption = Object.keys(roles).map((key)=>{
+      return <option key={key} value={roles[key]}>{roles[key]}</option>
+    })
     const handleChange = (e) =>{
         const name = e.target.name;
         const value = e.target.value;
-        setEmployer({...employer,[name]:value})
-
+        if(name==='hiringRoleId'){
+          for(let key of Object.keys(roles)){
+            if(roles[key]===value){
+              setEmployer({...employer,[name]:key})
+            }
+          }
+        }
+        else{
+          setEmployer({...employer,[name]:value})
+        }
     }
     
     const handleSubmit = (event) => {
@@ -23,7 +43,6 @@ export default function EmployerForm() {
         for(let i =0; i<eInputs.length;i++){
             eInputs[i].value = '';
         }
-        console.log(employer)
       axios
         .post("http://localhost:8888/api/user/employerInfo", employer)
         .then(function (response) {
@@ -32,12 +51,6 @@ export default function EmployerForm() {
         });
     };
 
-    const handleClear = (e) =>{
-        e.preventDefault();
-
-        const companyName = document.getElementById('companyName')
-        companyName.value = '';
-    }
     return (
       <div>
         <h1>Employer Form</h1>
@@ -73,7 +86,7 @@ export default function EmployerForm() {
                   <label>Company Street Address: </label>
                 </th>
                 <td>
-                  <input type="tel" name="streetAddres" onChange={handleChange} required />
+                  <input type="tel" name="streetAddress" onChange={handleChange} required />
                 </td>
               </tr>
               <tr>
@@ -90,6 +103,16 @@ export default function EmployerForm() {
                 </th>
                 <td>
                   <input type="text" name="zipCode" onChange={handleChange} required />
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label>Hiring Role: </label>
+                </th>
+                <td>
+                  <select name="hiringRoleId" onChange={handleChange}>
+                    {roleOption}
+                  </select>
                 </td>
               </tr>
               <tr>
