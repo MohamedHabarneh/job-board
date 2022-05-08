@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import CreateUser from "./components/CreateUser";
 import EditUser from "./components/EditUser";
+import EmployerForm from "./components/EmployerForm";
 import ListUser from "./components/ListUser";
 import SignIn from "./components/SignIn";
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route index element={<SignIn />} />
           <Route path="user/create" element={<CreateUser />} />
           <Route path="user/:id/edit" element={<EditUser />} />
+          <Route path="user/employerForm" element={<EmployerForm />} />
         </Routes>
       </BrowserRouter>
     </div>
