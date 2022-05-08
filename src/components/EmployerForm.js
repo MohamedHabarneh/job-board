@@ -73,7 +73,7 @@ export default function EmployerForm() {
                   <label>Company Street Address: </label>
                 </th>
                 <td>
-                  <input type="tel" name="streetAddres" onChange={handleChange} required />
+                  <input type="tel" name="streetAddres" onChange={handleChange} />
                 </td>
               </tr>
               <tr>
@@ -81,7 +81,7 @@ export default function EmployerForm() {
                   <label>Company State: </label>
                 </th>
                 <td>
-                  <input type="text" name="state"  placeholder="CA" onChange={handleChange} required />
+                  <input type="text" name="state"  placeholder="CA" onChange={handleChange}  />
                 </td>
                 </tr>
                 <tr>
@@ -89,7 +89,7 @@ export default function EmployerForm() {
                   <label>Company ZipCode: </label>
                 </th>
                 <td>
-                  <input type="text" name="zipCode" onChange={handleChange} required />
+                  <input type="text" name="zipCode" onChange={handleChange}  />
                 </td>
               </tr>
               <tr>
