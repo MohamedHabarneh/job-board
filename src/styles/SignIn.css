@@ -12,8 +12,6 @@
     border: 1px solid #ccc;
 }
 
-.Form-Wrapper {}
-
 .Comp-Wrapper {
     display: flex;
     flex-direction: row;

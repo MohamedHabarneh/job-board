@@ -44,14 +44,7 @@ export default function ListUser() {
                 <input type="text" name="email" onChange={handleChange} />
               </td>
             </tr>
-            <tr>
-              <th>
-                <label>Mobile: </label>
-              </th>
-              <td>
-                <input type="text" name="mobile" onChange={handleChange} />
-              </td>
-            </tr>
+            <tr></tr>
             <tr>
               <td colSpan="2" align="right">
                 <button>Save</button>

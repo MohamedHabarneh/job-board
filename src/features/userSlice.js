@@ -3,6 +3,7 @@ import {
 } from '@reduxjs/toolkit'
 
 const initialState = {
+    jwt: null,
     userID: null,
     firstName: null,
     lastName: null,
@@ -35,13 +36,17 @@ export const userSlice = createSlice({
         removeUser: (state) => {
             state = initialState
             state.isAuthed = false
-
+            state.jwt = false
         },
         setUser(state, action) {
             state.userID = action.payload.userID
             state.firstName = action.payload.firstName
             state.lastName = action.payload.lastName
             state.email = action.payload.email
+            state.isAuthed = true
+        },
+        setJWT(state, action) {
+            state.jwt = action.payload
         }
     },
 })
@@ -49,8 +54,10 @@ export const userSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
     setAuth,
-    decrement,
-    incrementByAmount
+    setEmployer,
+    removeUser,
+    setUser,
+    setJWT
 } = userSlice.actions
 
 export default userSlice.reducer

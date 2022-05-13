@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 import "../styles/SignIn.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setJWT } from "../features/userSlice";
 
 export default function SignIn() {
+  const dispatch = useDispatch();
+
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -33,8 +37,8 @@ export default function SignIn() {
     axios
       .post("http://localhost/api/login.php", loginInfo, config)
       .then(function (response) {
-        console.log(response.data);
-        navigate("/hello");
+        dispatch(setJWT(response.data.jwt));
+        navigate("/");
       });
   };
 
@@ -61,7 +65,7 @@ export default function SignIn() {
           <input
             className="Input-Field"
             placeholder="Password"
-            name="pass"
+            name="password"
             onChange={handleChange}
             type="password"
             required

@@ -87,7 +87,7 @@ PRIMARY KEY (JobTypeID)
 CREATE TABLE ExperienceRequired (
 ExpReqID	INT	NOT NULL AUTO_INCREMENT,
 TimeStamp	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-ExpType		VARCHAR(16),
+ExpType		VARCHAR(50),
 PRIMARY KEY (ExpReqID)
 );
 
@@ -115,7 +115,7 @@ Responsibilities	VARCHAR(200),
 Qualifications	VARCHAR(200),
 DatePosted	DATE,
 Deadline	DATE,
-ContactDetails	CHAR(50),
+ContactDetails	INT,
 
 PRIMARY KEY (JobPostID),
 FOREIGN KEY (EducationID) REFERENCES EducationLevels (EducationID),
@@ -123,6 +123,7 @@ FOREIGN KEY (AddressID) REFERENCES Address (AddressID),
 FOREIGN KEY (JobTypeID) REFERENCES JobTypes (JobTypeID),
 FOREIGN KEY (ExpReqID) REFERENCES ExperienceRequired (ExpReqID),
 FOREIGN KEY (SalaryID) REFERENCES SalaryRange (SalaryID)
+FOREIGN KEY (ContactDetails) REFERENCES Employer (EmployerID)
 
 );
 
@@ -184,7 +185,6 @@ CREATE TABLE JobBenefits (
 BenefitID	INT	NOT NULL,
 JobPostID	INT	NOT NULL,
 TimeStamp	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-JobBenefit		VARCHAR(16),
 PRIMARY KEY (BenefitID,JobPostID),
 FOREIGN KEY (BenefitID)	REFERENCES BenefitsOffered(BenefitID),
 FOREIGN KEY (JobPostID)	REFERENCES JobPosts (JobPostID)
