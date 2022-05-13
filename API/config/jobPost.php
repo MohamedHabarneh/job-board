@@ -41,7 +41,7 @@ class JobPost
             Qualifications = :qualifications,
             DatePosted = CURRENT_TIMESTAMP,
             Deadline = :endDate,
-            ContactDetails =, :employer";
+            ContactDetails = :employer";
 
         $stmt = $this->conn->prepare($query);
 
@@ -70,7 +70,14 @@ class JobPost
         $stmt->bindParam(':endDate', $this->endDate);
         $stmt->bindParam(':employer', $this->employer);
 
+        $date = date_create($this->endDate);
+        $this->endDate = date_format($date, 'Y-m-d H:i:s');
+
         if ($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();
+            if (!$this->postBenefits()) {
+                echo "no benefits inserted";
+            }
             return true;
         }
 
@@ -78,5 +85,34 @@ class JobPost
         print_r($stmt->errorInfo());
         $this->error = "Server Error";
         return false;
+    }
+
+    function postBenefits()
+    {
+        $benefitsArray = $this->benefits;
+        $this->table_name = "JobBenefits";
+        foreach ($benefitsArray as $value) {
+            $query = "INSERT INTO " . $this->table_name . "
+        SET
+            BenefitID = :benefitID,
+            JobPostID =  :postID";
+
+            $stmt = $this->conn->prepare($query);
+
+            $this->id = htmlspecialchars(strip_tags($this->id));
+            $value = htmlspecialchars(strip_tags($value));
+
+            $stmt->bindParam(':benefitID', $value);
+            $stmt->bindParam(':postID', $this->id);
+
+            if ($stmt->execute()) {
+                return true;
+            }
+
+            echo "\nPDO::errorInfo():\n";
+            print_r($stmt->errorInfo());
+            $this->error = "Server Error";
+            return false;
+        }
     }
 }

@@ -102,4 +102,39 @@ class Employer extends User
         $this->error = "Server Error";
         return false;
     }
+
+    function isEmployer()
+    {
+        $this->table_name = "Employer";
+        $query = "SELECT EmployerID, AddressID 
+        FROM " . $this->table_name . "
+                WHERE UserID = ?
+                LIMIT 0,1";
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+        // bind given email value
+        $stmt->bindParam(1, $this->id);
+        // execute the query
+        $stmt->execute();
+
+        // get number of rows
+        $num = $stmt->rowCount();
+        // if email exists, assign values to object properties for easy access and use for php sessions
+        if ($num > 0) {
+
+            // get record details / values
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // assign values to object properties
+            $this->employerId = $row['EmployerID'];
+            if (isset($row['AddressID'])) {
+                $this->companyAddress = $row['AddressID'];
+            }
+            return true;
+        }
+
+
+        return false;
+    }
 }
