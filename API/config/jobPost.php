@@ -105,14 +105,11 @@ class JobPost
             $stmt->bindParam(':benefitID', $value);
             $stmt->bindParam(':postID', $this->id);
 
-            if ($stmt->execute()) {
-                return true;
+            if (!$stmt->execute()) {
+                echo "\nPDO::errorInfo():\n";
+                print_r($stmt->errorInfo());
+                $this->error = "Server Error";
             }
-
-            echo "\nPDO::errorInfo():\n";
-            print_r($stmt->errorInfo());
-            $this->error = "Server Error";
-            return false;
         }
     }
 }

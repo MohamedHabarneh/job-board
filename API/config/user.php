@@ -36,7 +36,7 @@ class User
             SET
                 FirstName = :fName,
                 LastName = :lName,
-                AcctEmail = :email,
+                UserEmail = :email,
                 Phone = :phone,
                 Password = :password,
                 TimeStamp =  CURRENT_TIMESTAMP";
@@ -80,7 +80,7 @@ class User
         // query to check if email exists
         $query = "SELECT UserID, FirstName, LastName, Password
                 FROM " . $this->table_name . "
-                WHERE AcctEmail = ?
+                WHERE UserEmail = ?
                 LIMIT 0,1";
 
         // prepare the query
