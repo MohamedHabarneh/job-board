@@ -123,7 +123,7 @@ FOREIGN KEY (EducationID) REFERENCES EducationLevels (EducationID),
 FOREIGN KEY (AddressID) REFERENCES Address (AddressID),
 FOREIGN KEY (JobTypeID) REFERENCES JobTypes (JobTypeID),
 FOREIGN KEY (ExpReqID) REFERENCES ExperienceRequired (ExpReqID),
-FOREIGN KEY (SalaryID) REFERENCES SalaryRange (SalaryID)
+FOREIGN KEY (SalaryID) REFERENCES SalaryRange (SalaryID),
 FOREIGN KEY (ContactDetails) REFERENCES Employer (EmployerID)
 
 );
