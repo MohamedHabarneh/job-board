@@ -174,6 +174,23 @@ Salary		INT,
 PRIMARY KEY (SalaryID)
 );
 
+INSERT INTO `SalaryRange` (`SalaryID`, `TimeStamp`, `Salary`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 35000);
+INSERT INTO `SalaryRange` (`SalaryID`, `TimeStamp`, `Salary`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 40000);
+INSERT INTO `SalaryRange` (`SalaryID`, `TimeStamp`, `Salary`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 50000);
+INSERT INTO `SalaryRange` (`SalaryID`, `TimeStamp`, `Salary`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 70000);
+INSERT INTO `SalaryRange` (`SalaryID`, `TimeStamp`, `Salary`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 100000);
+
+
 -- Table: JobPosts
 CREATE TABLE JobPosts (
 JobPostID	INT	NOT NULL AUTO_INCREMENT,
