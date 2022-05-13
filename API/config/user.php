@@ -23,6 +23,7 @@ class User
     {
         $this->conn = $db;
     }
+
     public function setDB($db)
     {
         $this->db = $db;
