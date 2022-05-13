@@ -23,10 +23,30 @@ UNIQUE (UserEmail)
 CREATE TABLE Roles (
 RoleID	INT	NOT NULL AUTO_INCREMENT,
 TimeStamp	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-roleType		VARCHAR(16),
+roleType		VARCHAR(30),
 PRIMARY KEY (RoleID)
 );
-
+INSERT INTO `Roles` (`RoleID`, `TimeStamp`, `roleType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Owner');
+INSERT INTO `Roles` (`RoleID`, `TimeStamp`, `roleType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'CEO');
+INSERT INTO `Roles` (`RoleID`, `TimeStamp`, `roleType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Assistant or Manager');
+INSERT INTO `Roles` (`RoleID`, `TimeStamp`, `roleType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Human Resources Generalis');
+INSERT INTO `Roles` (`RoleID`, `TimeStamp`, `roleType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Hiring Manage');
+INSERT INTO `Roles` (`RoleID`, `TimeStamp`, `roleType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Recruiter');
+INSERT INTO `Roles` (`RoleID`, `TimeStamp`, `roleType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Other');
 
 -- Table: Address
 CREATE TABLE Address (
@@ -59,9 +79,34 @@ FOREIGN KEY (AddressID) REFERENCES Address(AddressID)
 CREATE TABLE EducationLevels (
 EducationID	INT	NOT NULL AUTO_INCREMENT,
 TimeStamp	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-EducationLevel		VARCHAR(16),
+EducationLevel		VARCHAR(25),
 PRIMARY KEY (EducationID)
 );
+
+INSERT INTO `EducationLevels` (`EducationID`, `TimeStamp`, `EducationLevel`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'No Education Required');
+
+INSERT INTO `EducationLevels` (`EducationID`, `TimeStamp`, `EducationLevel`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'High School Degree');
+
+INSERT INTO `EducationLevels` (`EducationID`, `TimeStamp`, `EducationLevel`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Associates Degree');
+
+INSERT INTO `EducationLevels` (`EducationID`, `TimeStamp`, `EducationLevel`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Bachelors Degree');
+
+INSERT INTO `EducationLevels` (`EducationID`, `TimeStamp`, `EducationLevel`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Masters Degree');
+
+INSERT INTO `EducationLevels` (`EducationID`, `TimeStamp`, `EducationLevel`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Doctoral Degree');
+
 
 
 -- Table: Employee
@@ -84,6 +129,25 @@ JobType		VARCHAR(16),
 PRIMARY KEY (JobTypeID)
 );
 
+INSERT INTO `JobTypes` (`JobTypeID`, `TimeStamp`, `JobType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Full-Time');
+
+INSERT INTO `JobTypes` (`JobTypeID`, `TimeStamp`, `JobType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Part-Time');
+
+INSERT INTO `JobTypes` (`JobTypeID`, `TimeStamp`, `JobType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Contract');
+
+INSERT INTO `JobTypes` (`JobTypeID`, `TimeStamp`, `JobType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Temporary');
+
+INSERT INTO `JobTypes` (`JobTypeID`, `TimeStamp`, `JobType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Internship');
 -- Table: ExpereinceRequired
 CREATE TABLE ExperienceRequired (
 ExpReqID	INT	NOT NULL AUTO_INCREMENT,
@@ -91,6 +155,16 @@ TimeStamp	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTA
 ExpType		VARCHAR(50),
 PRIMARY KEY (ExpReqID)
 );
+
+INSERT INTO `ExperienceRequired` (`ExpReqID`, `TimeStamp`, `ExpType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Entry');
+INSERT INTO `ExperienceRequired` (`ExpReqID`, `TimeStamp`, `ExpType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Mid');
+    INSERT INTO `ExperienceRequired` (`ExpReqID`, `TimeStamp`, `ExpType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Senior');
 
 -- Table: SalaryRange
 CREATE TABLE SalaryRange (
@@ -158,6 +232,19 @@ TimeStamp	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTA
 AppStatus	VARCHAR(16),
 PRIMARY KEY (AppStatusID)
 );
+INSERT INTO `ApplicationStatus` (`AppStatusID`, `TimeStamp`, `AppStatus`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Applied');
+INSERT INTO `ApplicationStatus` (`AppStatusID`, `TimeStamp`, `AppStatus`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Rejected');
+INSERT INTO `ApplicationStatus` (`AppStatusID`, `TimeStamp`, `AppStatus`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Interviewed');
+INSERT INTO `ApplicationStatus` (`AppStatusID`, `TimeStamp`, `AppStatus`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Accepted');
+
 
 -- Table: AppliedPosts
 CREATE TABLE AppliedPosts (
@@ -179,6 +266,30 @@ TimeStamp	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTA
 BenefitType		VARCHAR(20),
 PRIMARY KEY (BenefitID)
 );
+
+INSERT INTO `BenefitsOffered` (`BenefitID`, `TimeStamp`, `BenefitType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Health Insurance');
+
+INSERT INTO `BenefitsOffered` (`BenefitID`, `TimeStamp`, `BenefitType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Vision Insurance');
+
+INSERT INTO `BenefitsOffered` (`BenefitID`, `TimeStamp`, `BenefitType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Dental Insurance');
+
+INSERT INTO `BenefitsOffered` (`BenefitID`, `TimeStamp`, `BenefitType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Life Insurance');
+
+INSERT INTO `BenefitsOffered` (`BenefitID`, `TimeStamp`, `BenefitType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, 'Pension');
+
+INSERT INTO `BenefitsOffered` (`BenefitID`, `TimeStamp`, `BenefitType`)
+VALUES
+	(NULL, CURRENT_TIMESTAMP, '401(k)');
 
 
 -- Table: JobBenefits
