@@ -14,7 +14,6 @@ export default function ListUser() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-
     axios
       .post("http://localhost:8888/api/user/save", inputs)
       .then(function (response) {
@@ -38,10 +37,32 @@ export default function ListUser() {
             </tr>
             <tr>
               <th>
+                <label>Password: </label>
+              </th>
+              <td>
+                <input type="password" name="password" onChange={handleChange} />
+              </td>
+            </tr>
+            <tr>
+              <th>
                 <label>Email: </label>
               </th>
               <td>
                 <input type="text" name="email" onChange={handleChange} />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <label>Phone: </label>
+              </th>
+              <td>
+              <input
+                  type="tel"
+                  name="phone"
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  placeholder="123-456-7889"
+                  onChange={handleChange}
+                />
               </td>
             </tr>
             <tr></tr>
