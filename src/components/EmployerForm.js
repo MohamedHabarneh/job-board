@@ -105,7 +105,6 @@ export default function EmployerForm() {
                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                   placeholder="123-456-7889"
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -118,7 +117,6 @@ export default function EmployerForm() {
                   type="tel"
                   name="streetAddress"
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -132,7 +130,6 @@ export default function EmployerForm() {
                   name="state"
                   placeholder="CA"
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -145,7 +142,6 @@ export default function EmployerForm() {
                   type="text"
                   name="zipCode"
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -154,7 +150,7 @@ export default function EmployerForm() {
                 <label>Hiring Role: </label>
               </th>
               <td>
-                <select name="hiringRoleId" onChange={handleChange}>
+                <select name="hiringRoleId" onChange={handleChange} required>
                   {roleOption}
                 </select>
               </td>
