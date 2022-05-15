@@ -49,14 +49,16 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div className="App-header">
-          <img
-            className="Logo"
-            src={
-              window.location.origin + "/logo/Cloud-Jobs-logos_transparent.png"
-            }
-            alt="App-Logo"
-          />
-
+          <Link to="/">
+            <img
+              className="Logo"
+              src={
+                window.location.origin +
+                "/logo/Cloud-Jobs-logos_transparent.png"
+              }
+              alt="App-Logo"
+            />
+          </Link>
           <nav>
             <ul>
               <li>

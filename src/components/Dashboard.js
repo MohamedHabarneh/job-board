@@ -1,8 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import "../styles/Dashboard.css";
 import PostList from "./PostList";
 
 export default function Dashboard() {
+  const isAuth = useSelector((state) => state.user.isAuthed);
+  const name = useSelector((state) => state.user.firstName);
+
   return (
     <div className="split-pane-row">
       <div>
@@ -13,11 +18,23 @@ export default function Dashboard() {
           name="search"
           type="text"
         />
-
         <h3>Filter By Employer</h3>
-
-        <button className="login-btn"><span className="login-text">Login</span></button>
-        <button className="signup-btn"><span className="signup-text">Sign up</span></button>
+        {isAuth ? (
+          <div>
+            <span>Welcome Back, {name}</span>
+          </div>
+        ) : (
+          <div>
+            <Link to="/signin">
+              <button className="signup-btn">
+                <span className="signup-text">Login</span>
+              </button>
+            </Link>
+            <button className="login-btn">
+              <span className="login-text">Sign Up</span>
+            </button>
+          </div>
+        )}
       </div>
       <div className="separator-row"></div>
       <div className="split-pane-col">
