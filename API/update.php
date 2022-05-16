@@ -13,7 +13,6 @@ include('config/BeforeValidException.php');
 include('config/ExpiredException.php');
 include('config/SignatureInvalidException.php');
 include('config/Key.php');
-include('config/jobPost.php');
 
 $data = json_decode(file_get_contents("php://input"));
 $database = new Database();
@@ -47,22 +46,21 @@ if (empty($data->jwt)) {
             ));
             return;
         }
+        if (empty($data->postId) || empty($data->employeeId) || empty($data->status)) {
+            http_response_code(401);
+            // show error message
+            echo json_encode(array(
+                "message" => "Invalid Request",
+                "error" => "Not enough info"
+            ));
+            return;
+        }
+        $postId = $data->postId;
+        $employeeId = $data->employeeId;
+        $status = $data->status;
 
-        $post = new JobPost($db);
-        $post->desc = $data->desc;
-        $post->address = $user->companyAddress;
-        $post->title = $data->title;
-        $post->qualifications = $data->qualifications;
-        $post->responsibilities = $data->responsibilities;
-        $post->education = $data->education;
-        $post->type = $data->type;
-        $post->employer = $user->employerId;
-        $post->experience = $data->experience;
-        $post->salary = $data->salary;
-        $post->benefits = $data->benefits;
-        $post->endDate = $data->endDate;
 
-        $post->postJob();
+        $user->updatePostStatus($postId, $employeeId, $status);
     } catch (Exception $e) {
         // set response code
         http_response_code(401);

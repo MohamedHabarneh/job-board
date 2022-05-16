@@ -1,6 +1,7 @@
 <?php
 //Company name, Company Email, Company Phone number, Company address, and Role in Hiring Process. Company Address is optional. 
-include("user.php");
+include_once("user.php");
+include("jobPost.php");
 
 class Employer extends User
 {
@@ -14,6 +15,20 @@ class Employer extends User
     public function __construct($db)
     {
         parent::__construct($db);
+    }
+
+    public function __toString()
+    {
+        $json = array(
+            "employerId" => $this->employerId,
+            "companyName" => $this->companyName,
+            "companyEmail" => $this->companyEmail,
+            "companyPhone" => $this->companyPhone,
+            "companyAddress" => $this->companyAddress,
+            "hiringRole" => $this->hiringRole,
+            "jobPosts" => $this->jobPosts,
+        );
+        return json_encode($json);
     }
 
     public function addAddress()
@@ -133,8 +148,59 @@ class Employer extends User
             }
             return true;
         }
-
-
         return false;
+    }
+
+    function getPostedJobs()
+    {
+        $this->table_name = 'JobPosts';
+        $employerID = $this->employerId;
+        $this->table_name = "JobPosts";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE ContactDetails = " . $this->employerId;
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $posts = $stmt->fetchAll();
+        $posted = [];
+        foreach ($posts as $p) {
+            $post = new JobPost($this->conn);
+            $post->id = $p["JobPostID"];
+            $post->desc = $p["JobDescription"];
+            $post->address = $p["AddressID"];
+            $post->title = $p["JobPostTitle"];
+            $post->qualifications = $p["Qualifications"];
+            $post->responsibilities = $p["Responsibilities"];
+            $post->education = $p["EducationID"];
+            $post->type = $p["JobTypeID"];
+            $post->employer = $this->employerId;
+            $post->experience = $p["ExpReqID"];
+            $post->salary = $p["SalaryID"];
+            $post->datePosted = $p["DatePosted"];
+            $post->endDate = $p["Deadline"];
+            $post->benefits = $post->getBenefits();
+            $post->applied = $post->getApplied();
+
+            array_push($posted, $post);
+        }
+        return $posted;
+    }
+
+    function updatePostStatus($postId, $employeeId, $newStatus)
+    {
+        //UPDATE Customers SET ContactName = 'Alfred Schmidt', City= 'Frankfurt' WHERE CustomerID = 1;
+        $this->table_name = "AppliedPosts";
+        $query = "Update " . $this->table_name . "
+                Set AppStatusID = " . $newStatus . " WHERE JobPostID = " . $postId . " AND EmployeeID = " . $employeeId;
+
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+        // bind given email value
+        $stmt->bindParam(1, $this->id);
+        // execute the query
+        $stmt->execute();
+
+        echo "\nPDO::errorInfo():\n";
+        print_r($stmt->errorInfo());
+        $this->error = "Server Error";
     }
 }

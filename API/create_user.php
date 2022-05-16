@@ -8,9 +8,17 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
+use \Firebase\JWT\JWT;
+
 include("config/database.php");
 include("config/employer.php");
 include("config/employee.php");
+
+include_once 'config/core.php';
+include_once 'config/JWT.php';
+include('config/BeforeValidException.php');
+include('config/ExpiredException.php');
+include('config/SignatureInvalidException.php');
 
 // database connection will be here
 $database = new Database();
@@ -33,8 +41,27 @@ $user->phone = $data->phone;
 $user->password = $data->password;
 
 if (!empty($user->fName) && !empty($user->email) && !empty($user->password) && $user->create()) {
+    $token = array(
+        "iat" => $issued_at,
+        "exp" => $expiration_time,
+        "iss" => $issuer,
+        "data" => array(
+            "id" => $user->id,
+            "fName" => $user->fName,
+            "lName" => $user->lName,
+            "email" => $user->email
+        )
+    );
+
+    $jwt = JWT::encode($token, $key, 'HS256');
     http_response_code(200);
-    echo json_encode(array('message' => "User was created."));
+
+    echo json_encode(
+        array(
+            "message" => "Successful creation.",
+            "jwt" => $jwt
+        )
+    );
 } else {
     http_response_code(400);
     echo json_encode(array("message" => "Unable to create user.", "error" => $user->error));
